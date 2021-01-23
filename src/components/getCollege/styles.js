@@ -16,3 +16,5 @@ margin:"20pt",
 height:"34px  ",
 borderColor:"#D4D4D4"
     }
+
+export let h2={fontSize:"small"}

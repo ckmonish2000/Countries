@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {Input,Button,Tooltip,Card,List,Table,Tag} from "antd"
 import { SearchOutlined } from '@ant-design/icons';
-import {root,label,value,field} from "./styles"
+import {root,label,value,field,h2} from "./styles"
 import Search from 'antd/lib/input/Search';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 // import {dburl} from "../dburl"
@@ -58,9 +58,12 @@ style={{margin:"20pt"}}
 pagination={{pageSize:10}}
 loading={SearchData.length===0?true:false}> 
   <Column title="Country Name" dataIndex="name"/>
-  <Column title="Native Name" dataIndex="nativeName" />
+  <Column title="Capital" dataIndex="capital" />
   <Column title="Flag" dataIndex="flag"  render={img=><img src={img} width="20" height="20"/>}/>
-  <Column title="Time Zone" dataIndex="timezones"  render={img=><h6>{img[0]}</h6>}/>
+  <Column title="Longitude" dataIndex="latlng"  render={tz=><h2 style={h2}>{tz.length===0?"Na":tz[1]}</h2>}/>
+  <Column title="Latitude" dataIndex="latlng"  render={tz=><h2 style={h2}>{tz.length===0?"Na":tz[0]}</h2>}/>
+  <Column title="Time Zone" dataIndex="timezones"  render={tz=><h2 style={h2}>{tz[0]}</h2>}/>
+  <Column title="Currencies" dataIndex="currencies"  render={tz=><h2 style={h2}>{tz[0].symbol+" "+tz[0].code}</h2>}/>
   <Column
   title="Languages"
   dataIndex="languages"
