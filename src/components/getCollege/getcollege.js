@@ -14,7 +14,7 @@ export default function Getcollege(props) {
     const [SearchVal, setSearchVal] = useState("")
     const [SearchData, setSearchData] = useState([])
     const [noResult, setnoResult] = useState(false)
-   
+    const [SortBy, setSortBy] = useState("name")
     const OnClick=()=>{ 
     fetch(`${dburl}${SearchVal}`) .then(res=>res.json())
       .then(data=>{if(typeof data.length==="undefined"){props.history.push("/error")}setSearchData(data)})
@@ -22,7 +22,15 @@ export default function Getcollege(props) {
    
     }
    
-    
+  useEffect(() => {
+    SearchData?.sort(function(a, b) {
+      // Compare the 2 dates
+      if (a[SortBy] < b[SortBy]) return -1;
+      if (a[SortBy] > b[SortBy]) return 1;
+      return 0;
+    });
+    console.log(SearchData)
+  }, [SortBy])
     const OnChange=(e)=>setSearchVal(e.target.value.toLowerCase()) 
    
     console.log(SearchData)
