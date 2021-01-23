@@ -27,7 +27,7 @@ export default function Error({err,history}) {
             
             <div class="contant_box_404">
             <h3 class="h2" style={{textAlign:"center"}}>
-            "Oops, Something Went Wrong Check Your Network or no such country exsist"
+            "Oops, No such country exsist"
             </h3>   
         </div>
             </div>

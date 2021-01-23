@@ -17,7 +17,7 @@ export default function Getcollege(props) {
    
     const OnClick=()=>{ 
     fetch(`${dburl}${SearchVal}`) .then(res=>res.json())
-      .then(data=>{if(data.length===0){setnoResult(true)}else{setnoResult(false)};setSearchData(data)})
+      .then(data=>{if(typeof data.length==="undefined"){props.history.push("/error")}setSearchData(data)})
       .catch(err=>props.history.push("/error"))
    
     }
@@ -50,42 +50,32 @@ export default function Getcollege(props) {
             <Button type="primary" shape="circle" icon={<SearchOutlined />} onClick={OnClick} />
             </Tooltip>
             </div>
+{SearchData.length===0?"":
 
-            <Table dataSource={SearchData} 
-    style={{margin:"20pt"}}
-    pagination={{pageSize:10}}
-    loading={SearchData.length===0?true:false}> 
-      <Column title="Country Name" dataIndex="name"/>
-      <Column title="Flag" dataIndex="flag"  render={img=><img src={img} width="20" height="20"/>}/>
-      <Column
-      title="Languages"
-      dataIndex="languages"
-      key="tags"
-      render={Tager}
-    />
-        {/*<Column title="State" dataIndex="state" />
-      <Column title="City" dataIndex="city" />
-   */}
- 
-  </Table>
-{/* 
-       {SearchData.length>0 && 
-        <Card title={<h1 style={{textAlign:"center"}}>{SearchData[0]?.name.toUpperCase()}</h1>} style={{ width: 800,margin:"auto" }}>
-       <div> <label style={label}>City: </label><span style={value}>{SearchData[0]?.city.toUpperCase()}</span></div>
-        <br/>
-       <div> <label style={label}>State: </label><span style={value}>{SearchData[0]?.state.toUpperCase()}</span></div>
-        <br/>
-        <div><label style={label}>Country: </label><span style={value}>{SearchData[0]?.country.toUpperCase()}</span></div>
-        <br/>
-       <div> <label style={label}>Year founded: </label><span style={value}>{SearchData[0]?.yearFounded.toUpperCase()}</span></div>
-        <br/>
-        <div><label style={label}>Number Of Students: </label><span style={value}>{SearchData[0]?.No_Of_Students}</span></div>
-        <br/>
-        <div><label style={label}>Courses: </label><span style={value}>{SearchData[0]?.courses}</span></div>
-       
-        </Card>} */}
 
-        {noResult && <h1 style={{textAlign:"center",color:"grey",opacity:0.7,marginTop:"50pt"}}>No Such Country Exsists </h1>}
+<Table dataSource={SearchData} 
+style={{margin:"20pt"}}
+pagination={{pageSize:10}}
+loading={SearchData.length===0?true:false}> 
+  <Column title="Country Name" dataIndex="name"/>
+  <Column title="Native Name" dataIndex="nativeName" />
+  <Column title="Flag" dataIndex="flag"  render={img=><img src={img} width="20" height="20"/>}/>
+  <Column title="Time Zone" dataIndex="timezones"  render={img=><h6>{img[0]}</h6>}/>
+  <Column
+  title="Languages"
+  dataIndex="languages"
+  key="tags"
+  render={Tager}
+/>
+
+    {/*<Column title="State" dataIndex="state" />
+  <Column title="City" dataIndex="city" />
+*/}
+
+</Table>
+}
+
+      
 
 
            
